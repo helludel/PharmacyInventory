@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hanael Pharmacy</title>
+
+</head>
+<body bgcolor="#7fffd4">
+<h3>Create Inventory Page</h3>
+<form th:action="@{/Pharma/createInventory}" method="POST"th:object="${inventoryDTO}" th:csrf>
+    <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+    </p>
+
+    <p>
+        <label for="rQuantity">Quantity:</label>
+        <input type="number" id="rQuantity" name="rQuantity" required />
+    </p>
+
+    <!-- Unit Cost -->
+    <p>
+        <label for="unitCost">Unit Cost:</label>
+        <input type="number" id="unitCost" name="unitCost" step="0.01" required />
+    </p>
+
+    <!-- Expiry Date -->
+    <p>
+        <label for="exDate">Expiry Date:</label>
+        <input type="Local date" id="exDate" name="exDate" required />
+    </p>
+
+    <input type="submit" value="createInventory">
+</form>
+</body>
+
+</html>

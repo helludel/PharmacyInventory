@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hanael Pharmacy</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Styles.css}" />
+
+</head>
+<body bgcolor="#7fffd4">
+<div class="background-image">
+    <div class="form-container">
+        <img src="pharmacyLogo.jpg" alt="Logo" class="logo" />
+        <h3>Create Sales</h3>
+<form method="POST" th:action="@{/Pharma/createSales}" th:csrf  enctype="multipart/form-data">
+    <!-- form contents -->
+    <br>
+    <label for="qrCodeImage">Select QR Code Image:</label>
+    <input accept="image/*" id="qrCodeImage" name="qrCodeImage" required type="file">
+    <br>
+    <p>
+        <label for="salesQuantity">Sales Quantity:</label>
+        <input id="salesQuantity" name="salesQuantity" type="number"><br><br>
+    </p>
+    <button type="submit">Create Sale</button>
+</form>
+</body>
+</html>

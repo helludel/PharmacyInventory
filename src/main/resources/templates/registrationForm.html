@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml"    xmlns:sec="http://www.thymeleaf.org/extra/spring-security">
+<head>
+  <title>Register</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Style the form container */
+        .form-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        /* Style form labels and inputs */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Add more styles as needed for your specific requirements */
+
+        /* Centered text for "Don't have an account?" */
+        p {
+            text-align: center;
+        }
+
+        /* Style the Register button */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body bgcolor="#adff2f">
+<div class="form-container">
+  <h2>Register</h2>
+  <form id="registrationForm" th:object="${registrationDTO}" th:action="@{/Pharma/createUser}" method="POST"  th:csrf>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" th:field="*{username}" required>
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" th:field="*{password}" required>
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br>
+
+    <label for="roleName">Role Name:</label>
+    <input type="text" id="roleName" name="roleName" placeholder="Enter new role name">
+
+    <input type="submit" value="Register">
+  </form>
+  <span th:if="${usernameTaken}">Username is already taken.</span>
+  <span th:if="${emailRegistered}">Email is already registered.</span>
+  <p>Already have an account? <a th:href="@{/showMyLoginPage}">Back to Login</a></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!-- listInventory.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Inventory</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+        #searchInput {
+            margin-bottom: 15px;
+             margin-left: 5px;
+             margin-right:5px
+        }
+
+        /* Style for editable cells */
+        [contenteditable="true"]:focus {
+            outline: 1px solid #5c5c5c;
+        }
+    </style>
+</head>
+<body bgcolor="#7fffd4">
+
+<input type="text" id="searchInput" placeholder="Search by name">
+
+<!-- Your table content -->
+<table id="inventoryTable" class="table table-bordered" bgcolor="#90ee90">
+  <thead>
+  <tr>
+    <th bgcolor="#adff2f">ID</th>
+    <th bgcolor="#adff2f">Name</th>
+    <th bgcolor="#adff2f">Quantity</th>
+    <th bgcolor="#adff2f">UNIT COST</th>
+    <th bgcolor="#adff2f">Expiry Date</th>
+    <th bgcolor="green">Edit</th>
+    <!-- Add more columns as needed -->
+  </tr>
+  </thead>
+  <tbody > <!-- InventoryList -->
+
+  <!-- Table body content will be populated dynamically -->
+  <tr  bgcolor="#7fffd4" th:each="item, rowStat : ${inventoryList}" data-id="${rowStat.index}">
+    <td th:text="${item.id}">Inventory ID</td>
+    <td th:text="${item.name}">Inventory Name</td>
+    <td th:text="${item.rQuantity}">Inventory Quantity</td>
+    <td th:text="${item.unitCost}">Inventory Cost</td>
+    <td th:text="${item.exDate}">Expiry Date</td>
+    <td>
+      <button onclick="editItem('${item.id}', '${item.name}', '${item.rQuantity}', '${item.unitCost}', '${item.expiryDate}')">Edit</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Modal for editing -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <form id="editForm" onsubmit="saveChanges(event)">
+      <!-- Form fields for editing -->
+      <label for="itemId">ID:</label>
+      <input type="text" id="itemId" name="itemId" readonly><br><br>
+      <label for="itemName">Name:</label>
+      <input type="text" id="itemName" name="itemName" required><br><br>
+      <label for="itemQuantity">Quantity:</label>
+      <input type="text" id="itemQuantity" name="itemQuantity" required><br><br>
+      <label for="itemCost">Cost:</label>
+      <input type="text" id="itemCost" name="itemCost" required><br><br>
+      <label for="itemExpiry">Expiry Date:</label>
+      <input type="text" id="itemExpiry" name="itemExpiry" required><br><br>
+      <input type="submit" value="Save">
+    </form>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        // Initialize DataTable
+        const dataTable = $('#inventoryTable').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            lengthChange: true,
+            info: true
+        });
+
+        // Add DataTable search event listener
+        $('#searchInput').on('input', function () {
+            dataTable.search($(this).val()).draw();
+        });
+    });
+
+    // ... (other existing JavaScript code)
+
+    function saveChanges(event) {
+        event.preventDefault();
+
+        const itemId = document.getElementById('itemId').value;
+        const itemName = document.getElementById('itemName').value;
+        const itemQuantity = document.getElementById('itemQuantity').value;
+        const itemCost = document.getElementById('itemCost').value;
+        const itemExpiry = document.getElementById('itemExpiry').value;
+
+        // Update the table cell values
+        const row = document.querySelector(`#inventoryTable tr[data-id='${itemId}']`);
+        row.querySelector('td:nth-child(2)').textContent = itemName;
+        row.querySelector('td:nth-child(3)').textContent = itemQuantity;
+        row.querySelector('td:nth-child(4)').textContent = itemCost;
+        row.querySelector('td:nth-child(5)').textContent = itemExpiry;
+
+        // Close the modal
+        closeModal();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+jwt:
+  hanaelnael: hanaelnael
+  jwt:
+    expiration: 3600

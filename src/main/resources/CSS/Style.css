@@ -1,0 +1,35 @@
+
+body {
+
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border: 10px solid #333; /* Border style */
+}
+
+/* Style the form container */
+.form-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Add more styles as needed for your specific requirements */
+.logo {
+    max-width: 100px; /* Adjust the maximum width of your logo */
+    margin-bottom: 20px;
+}
+
+.background-image {
+    background-image: url('pharmacyLogo.jpg'); /* Replace with your background image URL */
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Text color on top of the background image */
+}

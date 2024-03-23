@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Success Page</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .success-message {
+            color: #28a745;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .success-icon {
+            color: #28a745;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .home-link {
+            text-decoration: none;
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="success-message">Success!</div>
+<div class="success-icon">&#10003;</div>
+<p>Your operation was successful.</p>
+<a th:href="@{/home}" class="home-link">Go to Home</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Hanael Pharmacy </title>
+
+</head>
+<body bgcolor="#7fffd4">
+
+<h1>List OF Employees </h1>
+
+<table border="1">
+  <thead>
+  <tr>
+
+    <th>Id</th>
+    <th>User Name</th>
+    <th>Email</th>
+    <!-- Add more columns as needed -->
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="users : ${users}">
+    <td th:text="${users.Id}"></td>
+    <td th:text="${users.username}"></td>
+    <td th:text="${users.email}"></td>
+    <!-- Add more columns as needed -->
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

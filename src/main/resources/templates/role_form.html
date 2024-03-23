@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+        <title>Create or Update Role</title>
+
+    </head>
+<body>
+<h2>Create or Update Role</h2>
+<form id="role_form"  th:object="${role}" th:action="@{/Pharma/createRoleForm}" method="post" th:csrf>>
+    <label for="roleName">Role Name:</label>
+    <input type="text" id="roleName" name="roleName"><br>
+    <!-- Other fields for the Role entity -->
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete & Get Employee</title>
+  <style>
+        .form-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#adff2f">
+
+<h2>Delete & Get Employee Form</h2>
+<div class="form-container">
+  <form action="/Pharma/userDeleteById" method="POST" onsubmit="deleteEmployee(event)">
+    <label for="deleteEmployeeId">Employee ID:</label>
+    <input type="text" id="deleteEmployeeId" name="id" required>
+    <br>
+    <input type="submit" value="Delete Employee">
+  </form>
+</div>
+<div class="form-container">
+  <form action="/Pharma/getUserById" method="GET" onsubmit="getEmployee(event)">
+    <label for="getEmployeeId">Employee ID:</label>
+    <input type="text" id="getEmployeeId" name="id" required>
+    <br>
+    <input type="submit" value="Get Employee">
+  </form>
+</div>
+<script>
+     function deleteEmployee(event) {
+    event.preventDefault();
+
+    var employeeId = document.getElementById("deleteEmployeeId").value;
+
+    fetch(`/Pharma/userDeleteById?id=${employeeId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+            // Add other headers if needed
+        }
+    })
+    .then(response => {
+        if (response.status === 204) {
+            alert('Employee deleted successfully');
+        } else {
+            alert('Failed to delete employee. Check the Employee ID and try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting employee:', error);
+        alert('An error occurred while deleting the employee. Please try again.');
+    });
+}
+    </script>
+</body>
+</html>

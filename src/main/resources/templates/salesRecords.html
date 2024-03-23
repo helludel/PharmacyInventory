@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hanael Pharmacy</title>
+
+</head>
+<body>
+
+<h1>Daliy Sales</h1>
+
+<p>Daily Sale List:</p>
+
+<table border="1">
+    <thead>
+    <tr>
+
+        <th>Sale Date</th>
+        <th>Sales Quantity</th>
+        <th>Total Price</th>
+        <!-- Add more columns as needed -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sales: ${salesRecords}">
+        <td th:text="${sales.saleDate}"></td>
+        <td th:text="${sales.salesQuantity}"></td>
+        <td th:text="${sales.totalPrice}"></td>
+        <!-- Add more columns as needed -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

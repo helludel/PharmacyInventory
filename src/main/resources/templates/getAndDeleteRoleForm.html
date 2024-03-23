@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete & Get Role Form</title>
+  <style>
+        .form-container {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body bgcolor="#adff2f">
+
+<h2>Delete & Get Role Form</h2>
+<div class="form-container">
+<form action="/Pharma/roleDelete" method="POST" onsubmit="deleteRole(event)">
+  <label for="deleteRoleId">Role ID:</label>
+  <input type="text" id="deleteRoleId" name="id" required>
+  <br>
+  <input type="submit" value="Delete Role">
+</form>
+</div>
+<div class="form-container">
+<form action="/Pharma/roleGet" method="GET" onsubmit="getRole(event)">
+  <label for="getRoleId">Role ID:</label>
+  <input type="text" id="getRoleId" name="id" required>
+  <br>
+  <input type="submit" value="Get Role">
+</form>
+</div>
+<script>
+        function deleteRole(event) {
+            event.preventDefault();
+
+            var roleId = document.getElementById("deleteRoleId").value;
+
+            fetch(`/Pharma/roleDelete?id=${roleId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                    // Add other headers if needed
+                }
+            })
+            .then(response => {
+                if (response.status === 204) {
+                    alert('Role deleted successfully');
+                } else {
+                    alert('Failed to delete role. Check the Role ID and try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting role:', error);
+                alert('An error occurred while deleting the role. Please try again.');
+            });
+        }
+    </script>
+
+</body>
+</html>

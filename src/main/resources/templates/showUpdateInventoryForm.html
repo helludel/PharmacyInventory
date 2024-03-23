@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extra/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Hanael Pharmacy</title>
+
+</head>
+<body bgcolor="#7fffd4">
+<h3>Update Inventory</h3>
+<a href="Pharma/showUpdateInventoryForm/123">Update Inventory</a>
+<form th:action="@{/Pharma/updateInventoryFromQRCode}" method="POST" enctype="multipart/form-data">>
+  <label for="qrCodeImage">Select QR Code Image:</label>
+  <input type="file" name="qrCodeImage" id="qrCodeImage" accept="image/*" required>
+  <br>
+  <p>
+    <label for="name">New Inventory Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+  </p>
+  <p>
+    <label for="rQuantity">New Inventory Quantity:</label>
+    <input type="number" id="rQuantity" name="rQuantity"><br><br>
+  </p>
+  <p>
+    <label for="unitCost">Unit Cost:</label>
+    <input type="number" id="unitCost" name="unitCost" step="0.01" required />
+  </p>
+  <p>
+    <label for="exDate">Expiry Date:</label>
+    <input type="date" id="exDate" name="exDate" required />
+  </p>
+  <button type="submit">Update Inventory</button>
+</form>
+</body>
+</html>

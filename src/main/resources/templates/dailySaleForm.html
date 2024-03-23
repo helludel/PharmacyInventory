@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Hanael Pharmacy</title>
+
+</head>
+<body bgcolor="#7fffd4">
+
+<h1>Daily Sales </h1>
+<img src="pharmacyLogo.jpg">
+<form th:action="@{/Pharma/dailySale}" method="GET">
+  <label for="saleDate">Enter date:</label>
+  <input type="date" id="saleDate" name="saleDate" required>
+  <br>
+  <button type="submit">Get Daily Sales </button>
+</form>
+
+</body>
+</html>

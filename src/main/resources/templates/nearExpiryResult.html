@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Near Expiry Result</title>
+
+</head>
+<body bgcolor="#adff2f">
+
+<h1>Near Expiry Result</h1>
+
+<p>Near Expiry Inventory List:</p>
+
+<table border="1">
+  <thead>
+  <tr>
+
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Unit Cost</th>
+    <th>Expiry Date</th>
+    <!-- Add more columns as needed -->
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="inventoryItem : ${nearExpiryResult}">
+    <td th:text="${inventoryItem.name}"></td>
+    <td th:text="${inventoryItem.unitCost}"></td>
+    <td th:text="${inventoryItem.rQuantity}"></td>
+    <td th:text="${inventoryItem.exDate}"></td>
+    <!-- Add more columns as needed -->
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

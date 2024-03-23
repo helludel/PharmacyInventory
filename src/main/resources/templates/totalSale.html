@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extra/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Hanael Pharmacy</title>
+
+</head>
+<body bgcolor="#adff2f">
+<h3>Total Sale</h3>
+<form th:action="@{/Pharma/totalSales}" method="POST" enctype="multipart/form-data">
+    <label for="qrCodeImage">Select QR Code Image:</label>
+    <input type="file" name="qrCodeImage" id="qrCodeImage" accept="image/*" required>
+    <br>
+    <button type="submit">Total Sale</button>
+</form>
+</body>
+</html>

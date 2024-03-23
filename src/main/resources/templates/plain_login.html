@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extra/spring-security">
+<head>
+    <title>Hanael Pharmacy Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Style the form container */
+        .form-container {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Style form labels and inputs */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            border-color: #007bff;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style the Register button */
+        .register-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 3px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .register-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body bgcolor="#adff2f">
+<div class="form-container">
+    <h2 style="text-align: center;">Hanael Pharmacy Login Page</h2>
+    <form id="loginForm" th:action="@{/authenticateTheUser}" method="post" th:object="${credentials}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+
+        <input type="submit" value="Submit">
+    </form>
+    <form th:action="@{/Pharma/userNameUpdateForm}" method="GET">
+        <button class="update username" type="submit">Update Username??</button>
+    </form>
+    <form th:action="@{/Pharma/changePasswordForm}" method="GET">
+        <button class="change password" type="submit">Change Password??</button>
+    </form>
+    <form th:action="@{/Pharma/forgetPasswordForm}" method="GET">
+        <button class="reset password" type="submit">Forget the Password??</button>
+    </form>
+</div>
+</body>
+</html>

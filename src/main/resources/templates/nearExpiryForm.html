@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Low Stock Form</title>
+
+</head>
+<body bgcolor="#adff2f">
+
+<h1>Low Stock Form</h1>
+
+<form th:action="@{/Pharma/nearExpiryInventoryList}" method="GET">
+  <label for="thresholdDate">Enter date:</label>
+  <input type="date" id="thresholdDate" name="thresholdDate" required>
+  <br>
+  <button type="submit">Get Near Expiry Inventories </button>
+</form>
+
+</body>
+</html>

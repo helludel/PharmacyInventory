@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extra/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>HanaelNael Pharmacy Home Page</title>
+    <style>
+    body {
+    margin: 50px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background-color: lightgreen;
+    }
+
+    header {
+    text-align: center;
+    margin: 20px 0;
+    }
+
+    header h2 {
+    color: black;
+    margin: 5px 0;
+    }
+
+    header p {
+    color: blue;
+    margin: 5px 0;
+    }
+
+    .table-container {
+    width: 80%;
+    margin-top: 20px;
+    overflow-x: auto;
+    }
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    }
+
+    th, td {
+    padding: 15px;
+    text-align: left;
+    border: 2px solid #ff7f50; /* Coral color */
+    }
+
+    th {
+    background-color: #00ced1; /* Dark Turquoise color */
+    color: white;
+    }
+
+    tr:nth-child(even) {
+    background-color: #f0e68c; /* Khaki color */
+    }
+
+    tr:nth-child(odd) {
+    background-color: #98fb98; /* Pale Green color */
+    }
+
+    .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    }
+
+    .button-container form {
+    margin: 5px;
+    }
+
+    button {
+    background-color: yellow;
+    color: black;
+    padding: 20px 35px;
+    border: 2px solid powderblue;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    }
+
+    button:hover {
+    background-color: blue;
+    }
+    </style>
+</head>
+<body>
+<header>
+    <h2>HanaelNael Pharmacy Home Page</h2>
+    <hr>
+    <p>Welcome to HanaelNael Pharmacy Home Page</p>
+    <hr>
+    <p>We work for a Better Health</p>
+    <p>User name: <span th:text="${username}"></span></p>
+    <p>Role(s): <span th:text="${authorities}"></span></p>
+</header>
+
+<div class="button-container">
+    <form action="/Pharma/showCreateInventoryForm" method="GET">
+        <button type="submit">Show Create Inventory Form</button>
+    </form>
+    <form action="/Pharma/showUpdateInventoryForm" method="GET">
+        <button type="submit">Show Update Inventory Form</button>
+    </form>
+    <form th:action="@{/Pharma/listInventory}" method="GET">
+        <button type="submit">List Inventory</button>
+    </form>
+    <form th:action="@{/Pharma/listOfUsers}" method="GET">
+        <button type="submit">List Employees</button>
+    </form>
+    <form action="/Pharma/userDeleteOrGetById" method="GET" >
+        <button type="submit">Delete of Get Employee</button>
+    </form>
+
+    <form action="/Pharma/createRoleForm" method="GET">
+            <button type="submit">Create Role</button>
+        </form>
+
+    <form th:action="@{/Pharma/listRoles}" method="GET">
+        <button type="submit">Roles List</button>
+    </form>
+    <form action="/Pharma/getOrDeleteRole" method="GET">
+        <button type="submit">Get Or Delete Role</button>
+    </form>
+    <form action="/Pharma/lowStockForm" method="GET">
+        <button type="submit">Get Low Stock Inventories</button>
+    </form>
+    <form action="/Pharma/nearExpiryForm" method="GET">
+        <input type="hidden" name="date" value="2023-11-01" />
+        <button type="submit">Find Near Expiry Inventory</button>
+    </form>
+    <form action="/Pharma/showCreateSalesForm" method="GET">
+        <button type="submit">Create Sales</button>
+    </form>
+    <form action="/Pharma/totalSaleQr" method="GET">
+        <button type="submit">Get Total Sales</button>
+    </form>
+    <form action="/Pharma/dailySaleForm" method="GET">
+        <button type="submit">Get Daily Sales</button>
+    </form>
+    <form th:action="@{/Pharma/showRegistrationForm}" method="GET">
+        <button class="register-button" type="submit">Register New Employee Here</button>
+    </form>
+    <form action="#" th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout">
+        <div th:if="${param.logout}">
+            <i>You have been logged out!</i>
+            <div class="alert alert-success col-xs-offset-1 col-xs-10"></div>
+        </div>
+    </form>
+</div>
+    </form>
+</div>
+</body>
+</html>

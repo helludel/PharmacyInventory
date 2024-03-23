@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Username</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6bY/iBAe5eP6jDCAw6zrjuvqBktQOp6J"
+          crossorigin="anonymous">
+</head>
+<body bgcolor="#adff2f">
+
+<div class="container mt-5">
+    <h2 class="mb-4">Update Username</h2>
+
+    <!-- Username Update Form -->
+    <form method="POST" th:action="@{/Pharma/updateUserName}" >
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <div class="invalid-feedback">
+                Please enter a valid email address.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="newUserName">New Username:</label>
+            <input type="text" class="form-control" id="newUserName" name="newUserName" required>
+            <div class="invalid-feedback">
+                Please enter a new username.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Username</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6bY/iBAe5eP6jDCAw6zrjuvqBktQOp6J"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6bY/iBAe5eP6jDCAw6zrjuvqBktQOp6J"
+        crossorigin="anonymous"></script>
+
+
+
+
+</body>
+</html>
