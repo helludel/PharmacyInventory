@@ -16,6 +16,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @ComponentScan
@@ -32,6 +37,29 @@ public class SecurityConfiguration extends SecurityFilterAutoConfiguration {
 
     @Autowired
     private UserService userService;
+
+
+    @Bean
+    public SpringResourceTemplateResolver templateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setPrefix("classpath:/templates/"); // Ensure the prefix points to the correct directory
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        return templateResolver;
+    }
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setEnableSpringELCompiler(true);
+        return templateEngine;
+    }
+
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        registry.viewResolver(resolver);
+    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
@@ -50,36 +78,36 @@ public class SecurityConfiguration extends SecurityFilterAutoConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-            http.csrf().disable()
-                    .authorizeRequests((authorize)->
-                            authorize
-                                    .requestMatchers("/favicon.ico", "/error", "/Pharma/createOrUpdate", "/Pharma/createOrUpdateRole"
-                                            , "/Pharma/createUser").permitAll()
-                                    . requestMatchers("/Pharma/userNameUpdateForm","/Pharma/updateUserName","/Pharma/changePasswordForm","/Pharma/changePassword").permitAll()
-                                    . requestMatchers("/home").authenticated()
-                                    .requestMatchers("/Pharma/lowStock/{threshold}").hasRole("student")
-                                  .requestMatchers("/Pharma/totalSales/{Id}").hasRole("student")
-                                 .requestMatchers("/Pharma/dailySale/{saleDate}").hasRole("student")
-                                 .requestMatchers("/Pharma/nearExpiry/{thresholdDate}").hasRole("student")
-                                 .requestMatchers("/Pharma/showCreateInventoryForm").hasRole("student")
+        http.csrf().disable()
+                .authorizeRequests((authorize)->
+                        authorize
+                                .requestMatchers("/favicon.ico", "/error", "/Pharma/createOrUpdate", "/Pharma/createOrUpdateRole"
+                                        , "/Pharma/createUser").permitAll()
+                                . requestMatchers("/Pharma/userNameUpdateForm","/Pharma/updateUserName","/Pharma/changePasswordForm","/Pharma/changePassword").permitAll()
+                                . requestMatchers("/home").authenticated()
+                                .requestMatchers("/Pharma/lowStock/{threshold}").hasRole("student")
+                                .requestMatchers("/Pharma/totalSales/{Id}").hasRole("student")
+                                .requestMatchers("/Pharma/dailySale/{saleDate}").hasRole("student")
+                                .requestMatchers("/Pharma/nearExpiry/{thresholdDate}").hasRole("student")
+                                .requestMatchers("/Pharma/showCreateInventoryForm").hasRole("student")
                                 .requestMatchers("/Pharma/createInventory").hasRole("student")
-                                    .requestMatchers("/Pharma/forgetPasswordForm").permitAll()
-                                    .requestMatchers("/Pharma/resetPassword").permitAll()
+                                .requestMatchers("/Pharma/forgetPasswordForm").permitAll()
+                                .requestMatchers("/Pharma/resetPassword").permitAll()
                                 .requestMatchers("/Pharma/createSales").hasRole("student")
-                                    .requestMatchers("/Pharma/showRegistrationForm").permitAll()
-                          .anyRequest( ).authenticated()
-                    )
-                    .formLogin(form ->
-                            form
-                                    .loginPage("/showMyLoginPage")
-                                    .loginProcessingUrl("/authenticateTheUser")
-                                    .defaultSuccessUrl("/home")
-                                    .permitAll()
-                    )
-                    .logout(logout ->
-                            logout.permitAll());
+                                .requestMatchers("/Pharma/showRegistrationForm").permitAll()
+                                .anyRequest( ).authenticated()
+                )
+                .formLogin(form ->
+                        form
+                                .loginPage("/showMyLoginPage")
+                                .loginProcessingUrl("/authenticateTheUser")
+                                .defaultSuccessUrl("/home")
+                                .permitAll()
+                )
+                .logout(logout ->
+                        logout.permitAll());
 
-            return http.build();
+        return http.build();
 
     }
 }

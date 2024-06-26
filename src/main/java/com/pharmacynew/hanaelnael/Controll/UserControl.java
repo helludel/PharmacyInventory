@@ -24,15 +24,16 @@ public class UserControl {
     private final UserService userService;
 
 
-    @Autowired
-    public UserControl(UserService userService) {
-        this.userService = userService;
-    }
+    private final RoleEmployeeService roleEmployeeService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private RoleEmployeeService roleEmployeeService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserControl(UserService userService,RoleEmployeeService roleEmployeeService,PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.roleEmployeeService=roleEmployeeService;
+        this.passwordEncoder=passwordEncoder;
+    }
 
     @GetMapping("/listOfUsers")
     public String getAllUsers(Model model) {
@@ -42,7 +43,7 @@ public class UserControl {
     }
     @GetMapping("/userDeleteOrGetById")
     public String userDeleteOrGetByIdForm(){
-        return "userDeleteOrGetById";
+        return "userRemoveOrFindById";
     }
 
     @GetMapping("/getUserById")
@@ -115,5 +116,6 @@ public class UserControl {
         userService.resetPassword(email, userName, newPassword);
         return "success";
     }
+
 
 }

@@ -40,6 +40,10 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public User(int i, String user1, String mail, String password1, String manager) {
+    }
+
+
     public Role getRole() {
         return role;
     }

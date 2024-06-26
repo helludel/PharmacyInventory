@@ -29,8 +29,8 @@ public class SalesController {
 
     @GetMapping("/showCreateSalesForm")
     public String showCreateSaleForm(Model model) {
-        model.addAttribute("salesDTO", new SalesDTO());
-        return "showCreateSalesForm";
+        model.addAttribute("salesDTO", new SalesDTO( ));
+        return "createSalesForm";
     }
     @PostMapping("/createSales")
     public String createSales(Model model, @ModelAttribute SalesCreateDTO salesDTO, @RequestParam ("qrCodeImage" ) MultipartFile qrCodeImageFile) {
@@ -52,8 +52,10 @@ public class SalesController {
     public String shoeTotalSaleForm(){
         return "totalSale";
     }
+
     @PostMapping("/totalSales")
-    public String totalSales( Model model,@RequestParam("qrCodeImage")  MultipartFile qrCodeFileImage) throws IOException {
+    public String totalSales( Model model,@RequestParam("qrCodeImage")
+    MultipartFile qrCodeFileImage) throws IOException {
 
         try
         {byte[] qrCodeImage= qrCodeFileImage.getBytes( );
@@ -70,7 +72,7 @@ public class SalesController {
     }
     @GetMapping("/dailySaleForm")
     public String showDailySaleForm(){
-        return "dailySaleForm";
+        return "saleForm";
     }
     @GetMapping("/dailySale")
     public String getDailySales(Model model,@RequestParam("saleDate") LocalDate saleDate) {

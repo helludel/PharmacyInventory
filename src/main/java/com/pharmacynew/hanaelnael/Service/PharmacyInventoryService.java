@@ -15,20 +15,17 @@ import java.util.List;
 
 @Service
 public class PharmacyInventoryService {
-    private static  Logger logger = LoggerFactory.getLogger(SalesService.class);
+
+    private static  Logger logger = LoggerFactory.getLogger(PharmacyInventoryService.class);
     QRCodeService qrCodeService;
     PharmacyInventoryDAO pharmacyInventoryDAO;
 
     @Autowired
-    public PharmacyInventoryService(PharmacyInventoryDAO pharmacyInventoryDAO) {
+    public PharmacyInventoryService(PharmacyInventoryDAO pharmacyInventoryDAO,QRCodeService qrCodeService) {
         this.pharmacyInventoryDAO = pharmacyInventoryDAO;
-    }
-
-    @Autowired
-    public PharmacyInventoryService(QRCodeService qrCodeService) {
-
         this.qrCodeService = qrCodeService;
     }
+
 
     public PharmacyInventoryService(QRCodeService qrCodeService, PharmacyInventoryDAO pharmacyInventoryDAO, Logger loggerMock) {
         this.qrCodeService=qrCodeService;
@@ -36,9 +33,9 @@ public class PharmacyInventoryService {
         this.logger=loggerMock;
     }
 
-    public PharmacyInventoryService() {
+   // public PharmacyInventoryService() {
 
-    }
+  //  }
 
     @Transactional
     public PharmacyInventory createInventory(String name,
@@ -49,18 +46,18 @@ public class PharmacyInventoryService {
             PharmacyInventory inventory = new PharmacyInventory(name,
                     quantity, unitCost, unitPrice, exDate);
 
-            pharmacyInventoryDAO.save(inventory);
+          //  pharmacyInventoryDAO.save(inventory);//
 
             String qrCodeContent = String.valueOf(inventory.getId( ));
 
             byte[] qrCodeImage = qrCodeService.generateQRCode(qrCodeContent);
             inventory.setQrCodeImage(qrCodeImage);
-            logger.info("entered info is " + " name " + name + " quantity " + quantity + " unit cost  " + unitCost + " expiry date " + exDate);
+          logger.info("entered info is " + " name " + name + " quantity " + quantity + " unit cost  " + unitCost + " expiry date " + exDate);
             logger.info("received inventory is" + inventory.toString( ));
             logger.info("qr content created  "+qrCodeContent);
             logger.info("qr Image is also created "+ qrCodeImage);
             return pharmacyInventoryDAO.save(inventory);
-        }else throw new RuntimeException( "item  exists update? " );
+        }else throw new RuntimeException("item exists update?");
 
 
     }
@@ -72,18 +69,20 @@ public class PharmacyInventoryService {
     }
     public PharmacyInventory updateInventoryBasedOnQRCode(byte[] qrCodeImage,PharmacyInventoryDTO inventoryDTO) {
         PharmacyInventory inventory = pharmacyInventoryDAO.findByQrCodeImage(qrCodeImage);
-        logger.info("existing item is found"+inventory.toString());
-        if (inventory != null) {
-            Double unitPrice=(1.25* (inventoryDTO.getUnitCost() ));
+        logger.info("existing item is found: {}", (inventory == null ? "null" : inventory.toString()));
+
+        if(inventory!=null){
+            Double unitPrice = (1.25 * (inventoryDTO.getUnitCost( )));
             inventory.setRQuantity(inventoryDTO.getRQuantity( ));
-            inventory.setExDate(inventoryDTO.getExDate());
-            inventory.setName(inventoryDTO.getName());
+            inventory.setExDate(inventoryDTO.getExDate( ));
+            inventory.setName(inventoryDTO.getName( ));
             inventory.setQrCodeImage(qrCodeImage);
             inventory.setUnitPrice(unitPrice);
 
-         pharmacyInventoryDAO.save(inventory);
-        return inventory;
-        }else throw new RuntimeException( "the item doesn't exist" );
+            pharmacyInventoryDAO.save(inventory);
+            return inventory;
+        }else if  (inventory==null)throw new RuntimeException("Inventory not found for the provided QR code");
+        else throw new RuntimeException("error occured" );
     }
     @Transactional
     public PharmacyInventory updateInventory(PharmacyInventoryDTO dto, int Id) {
